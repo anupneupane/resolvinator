@@ -24,8 +24,12 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :development do
+group :development, :test do
   gem 'rspec-rails'
+  gem 'capybara'
+  gem 'launchy'
+  gem 'guard'
+  gem 'fsevent'
   gem 'timecop'
 end
 
