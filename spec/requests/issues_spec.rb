@@ -16,7 +16,7 @@ describe Issue do
     it "displays the options for status with checkboxes" do
       visit edit_issue_path(issue)
 
-      save_and_open_page
+      # save_and_open_page
 
       page.should have_content("Open")
       page.should have_content("Closed")
