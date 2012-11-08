@@ -7,14 +7,14 @@ class Issue < ActiveRecord::Base
   before_update :current_status
 
   def answer_accepted?
-    #self.comments.find_by_is_answer(true)
+    self.comments.find_by_is_answer(true)
 
-    array = self.comments.select {|c| c.is_answer == true}
-    if array.empty?
-      false
-    else
-      true
-    end
+    # array = self.comments.select {|c| c.is_answer == true}
+    # if array.empty?
+    #   false
+    # else
+    #   true
+    # end
   end
 
   def current_status
@@ -24,6 +24,8 @@ class Issue < ActiveRecord::Base
       self.status = "instructor needed"
     end
   end
+
+  private
 
   def default_values
     self.status = "open"
@@ -55,7 +57,7 @@ class Issue < ActiveRecord::Base
 
 
 
-  #issue answered -closed (if comments.is_answer == true then :closed state)
+  #issue answered -resolved (if comments.is_answer == true then :closed state)
     #Restricted access. Only the issue creator can reopen the issue for comments
 
         # verify current user (if current_user == user_id then 'full access')
