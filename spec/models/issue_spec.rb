@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Issue do
-  it "have a status attribute" do
+describe 'Issue' do
+  it " should have a status attribute" do
     issue = Issue.create(status:"open")
     issue.status.should be_true
   end

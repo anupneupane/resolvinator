@@ -4,17 +4,28 @@
   <b>Title:</b>
   <%= @issue.title %>
 </p>
-
 <p>
   <b>Description:</b>
   <%= @issue.description %>
 </p>
-
 <p>
   <b>Status:</b>
   <%= @issue.status %>
 </p>
-
-
 <%= link_to 'Edit', edit_issue_path(@issue) %> |
 <%= link_to 'Back', issues_path %>
+<!-- New Comment Form -->
+
+<%= form_for([@issue, @comment]) do |f| %>
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+  <%= f.submit %>
+<% end %>
+
+<!-- Issue.comments -->
+
+<ul>
+  <% @issue.comments.each do |c| %>
+  <li><%= c.content %></li>
+  <% end %>
+</ul>

@@ -29,14 +29,14 @@ end
 
 group :development, :test do
   gem 'sqlite3'
+  gem 'sextant'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'launchy'
   gem 'guard'
-  # gem 'fsevent'
+  gem 'rb-fsevent'
   gem 'timecop'
   gem 'guard-rspec'
-  # gem 'rb-fsevent', '~> 0.9.1'
 
   gem 'growl'
   gem 'capybara'
