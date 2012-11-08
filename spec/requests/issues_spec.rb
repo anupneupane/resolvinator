@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-<<<<<<< HEAD
 
 
 describe 'Issues' do
