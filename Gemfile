@@ -29,8 +29,14 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'guard'
-  gem 'fsevent'
+  # gem 'fsevent'
   gem 'timecop'
+  gem 'guard-rspec'
+  # gem 'rb-fsevent', '~> 0.9.1'
+
+  gem 'growl'
+  gem 'capybara'
+  gem 'launchy'
 end
 
 
