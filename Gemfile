@@ -25,11 +25,12 @@ group :assets do
 end
 
 group :development, :test do
+  gem 'sextant'
   gem 'rspec-rails'
   gem 'capybara'
   gem 'launchy'
   gem 'guard'
-  gem 'fsevent'
+  gem 'rb-fsevent'
   gem 'timecop'
 end
 

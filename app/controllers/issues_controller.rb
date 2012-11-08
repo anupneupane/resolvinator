@@ -14,6 +14,7 @@ class IssuesController < ApplicationController
   # GET /issues/1.json
   def show
     @issue = Issue.find(params[:id])
+    @comment = @issue.comments.build
 
     respond_to do |format|
       format.html # show.html.erb
@@ -56,6 +57,7 @@ class IssuesController < ApplicationController
   # PUT /issues/1
   # PUT /issues/1.json
   def update
+    raise params.inspect
     @issue = Issue.find(params[:id])
 
     respond_to do |format|
