@@ -57,7 +57,7 @@ class IssuesController < ApplicationController
   # PUT /issues/1
   # PUT /issues/1.json
   def update
-    raise params.inspect
+    # raise params.inspect
     @issue = Issue.find(params[:id])
 
     respond_to do |format|
