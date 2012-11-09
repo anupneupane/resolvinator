@@ -20,9 +20,12 @@
     <%= f.text_field :description %>
   </div>
   <div class="field">
-    <%= f.label "status" %><br />
-    <%= f.radio_button :status, "open" %>Open
-    <%= f.radio_button :status, "closed" %>Closed
+    <%= f.radio_button :status, "open" %>
+    <%= f.label :status, 'Open', :for => 'issue_status_open' %>
+    <%= f.radio_button :status, "instructor needed" %>
+    <%= f.label :status, 'Instructor Needed', :for => 'issue_status_instructor_needed' %>
+    <%= f.radio_button :status, "closed" %>
+    <%= f.label :status, 'Closed', :for => 'issue_status_closed' %>
   </div>
   <div class="actions">
     <%= f.submit %>

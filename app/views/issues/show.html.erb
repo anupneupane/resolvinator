@@ -10,7 +10,7 @@
 </p>
 <p>
   <b>Status:</b>
-  <%= @issue.status %>
+  <%= @issue.current_status %>
 </p>
 <%= link_to 'Edit', edit_issue_path(@issue) %> |
 <%= link_to 'Back', issues_path %>

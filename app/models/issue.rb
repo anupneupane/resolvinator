@@ -7,12 +7,14 @@ class Issue < ActiveRecord::Base
   before_update :current_status
 
   def answer_accepted?
-    array = self.comments.select {|c| c.is_answer == true}
-    if array.empty?
-      false
-    else
-      true
-    end
+    self.comments.find_by_is_answer(true)
+
+    # array = self.comments.select {|c| c.is_answer == true}
+    # if array.empty?
+    #   false
+    # else
+    #   true
+    # end
   end
 
   def current_status
@@ -23,8 +25,52 @@ class Issue < ActiveRecord::Base
     end
   end
 
+  private
+
   def default_values
     self.status = "open"
   end
+
+        #state change#
+  ##########################
+
+  #issue created - new
+    #Restricted access to comments. only immediate group should be able to respond (to be implemented later)
+
+
+
+
+
+  #15 minutes after creation of issue - open
+    #issue should be open to everyone(important)
+
+
+
+  #1 hour after creation of issue - instructor needed
+    # issue would then display instructor needed tag
+    # issue would ping instructor through email, twitter, facebook, snail mail, carrier pigeon, etc.
+    
+
+
+
+
+
+
+
+  #issue answered -resolved (if comments.is_answer == true then :closed state)
+    #Restricted access. Only the issue creator can reopen the issue for comments
+
+        # verify current user (if current_user == user_id then 'full access')
+
+
+
+
+
+  ##########################
+
+
+
+
+
 
 end
