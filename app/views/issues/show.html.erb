@@ -12,6 +12,10 @@
   <b>Status:</b>
   <%= @issue.current_status %>
 </p>
+<p>
+  <b>Answer Submitted by:</b>
+   <%= @answerer.username %>
+</p>
 <%= link_to 'Edit', edit_issue_path(@issue) %> |
 <%= link_to 'Back', issues_path %>
 <!-- New Comment Form -->
@@ -24,8 +28,7 @@
 
 <!-- Issue.comments -->
 
-<ul>
-  <% @issue.comments.each do |c| %>
-  <li><%= c.content %> (<%= c.user.username if c.user %>)</li>
-  <% end %>
-</ul>
+
+<% @issue.comments.each do |comment| %>
+ <%= render 'comments/answer', :c => comment %>
+<% end %>

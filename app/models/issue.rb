@@ -1,5 +1,5 @@
 class Issue < ActiveRecord::Base
-  attr_accessible :description, :status, :title
+  attr_accessible :description, :status, :title, :answer_id
 
   belongs_to :user
   has_many :comments
@@ -22,7 +22,7 @@ class Issue < ActiveRecord::Base
     if self.answer_accepted?
       self.status = "resolved"
     elsif self.created_at <= 30.minutes.ago
-      self.status = "instructor needed"
+      self.status = "instructor needed" unless self.status =="closed"
     end
   end
 

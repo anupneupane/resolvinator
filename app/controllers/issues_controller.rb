@@ -14,6 +14,7 @@ class IssuesController < ApplicationController
   # GET /issues/1.json
   def show
     @issue = Issue.find(params[:id])
+    @answerer = Comment.find(@issue.answer_id).user
     @comment = @issue.comments.build
 
     respond_to do |format|
@@ -36,6 +37,10 @@ class IssuesController < ApplicationController
   # GET /issues/1/edit
   def edit
     @issue = Issue.find(params[:id])
+
+    # if is_owner?()
+    #   @status = @issue.status
+    # end
   end
 
   # POST /issues

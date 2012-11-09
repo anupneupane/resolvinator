@@ -1,0 +1,11 @@
+<div><%= c.content %> (<%= c.user.username if c.user %>)
+
+
+
+  <%= form_for c.issue do |f| %>
+    <%#= f.check_box :answer_id %>
+    <%= f.hidden_field :answer_id, :value => c.id %>
+    <%= f.submit "mark as answer", :class => "btn btn-mini btn-danger" %>
+    <% end %>
+
+  </div>
