@@ -1,5 +1,4 @@
 class IssuesController < ApplicationController
-  before_filter :authenticate_user!
   # GET /issues
   # GET /issues.json
   def index
@@ -42,7 +41,7 @@ class IssuesController < ApplicationController
   # POST /issues
   # POST /issues.json
   def create
-    @issue = Issue.new(params[:issue])
+    @issue = current_user.issues.build(params[:issue])
 
     respond_to do |format|
       if @issue.save
