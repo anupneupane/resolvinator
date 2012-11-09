@@ -24,10 +24,11 @@ describe 'Issue' do
     issue.current_status.should == "resolved"
   end
 
-    context "issues with states" do
+  context "issues with states" do
     it "should default to a NEW state"
     it "should be marked OPEN once someone else is attempting to answer"
     it "should be marked CLOSED once an answer is accepted"
   end
 
+  end
 end

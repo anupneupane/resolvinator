@@ -5,7 +5,7 @@ class IssuesController < ApplicationController
     @issues = Issue.all
 
     respond_to do |format|
-      format.html # index.html.erb
+      format.html   #index.html.erb
       format.json { render json: @issues }
     end
   end
@@ -17,7 +17,7 @@ class IssuesController < ApplicationController
     @comment = @issue.comments.build
 
     respond_to do |format|
-      format.html # show.html.erb
+      format.html   #show.html.erb
       format.json { render json: @issue }
     end
   end
@@ -28,7 +28,7 @@ class IssuesController < ApplicationController
     @issue = Issue.new
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html  # new.html.erb
       format.json { render json: @issue }
     end
   end
