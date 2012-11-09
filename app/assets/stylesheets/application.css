@@ -12,3 +12,9 @@
  *= require_tree 
  *= require bootstrap_and_overrides
  */
+
+#username-issue {
+  float: left;
+  padding-right: 10px;
+}
+

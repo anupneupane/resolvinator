@@ -14,7 +14,7 @@ class IssuesController < ApplicationController
   # GET /issues/1.json
   def show
     @issue = Issue.find(params[:id])
-    @answerer = Comment.find(@issue.answer_id).user
+    @answerer = Comment.find(@issue.answer_id).user if @issue.answer_id
     @comment = @issue.comments.build
 
     respond_to do |format|
