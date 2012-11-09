@@ -25,6 +25,10 @@ class Issue < ActiveRecord::Base
     end
   end
 
+  def is_owner?(issue)
+    current_user == issue.user
+  end
+
   private
 
   def default_values
