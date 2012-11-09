@@ -1,6 +1,7 @@
 class Issue < ActiveRecord::Base
   attr_accessible :description, :status, :title
 
+  belongs_to :user
   has_many :comments
 
   before_create :default_values

@@ -3,6 +3,9 @@ class User < ActiveRecord::Base
 
   validates_presence_of :username
 
+  has_many :issues
+  has_many :comments
+
   def self.authenticate(username)
     user = find_by_username(username)
     if user

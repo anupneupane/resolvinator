@@ -26,6 +26,6 @@
 
 <ul>
   <% @issue.comments.each do |c| %>
-  <li><%= c.content %></li>
+  <li><%= c.content %> (<%= c.user.username if c.user %>)</li>
   <% end %>
 </ul>
