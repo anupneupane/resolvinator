@@ -14,7 +14,7 @@
 </p>
 <p>
   <b>Answer Submitted by:</b>
-   <%= @answerer.username %>
+   <%= @answerer.username if @answerer %>
 </p>
 <%= link_to 'Edit', edit_issue_path(@issue) %> |
 <%= link_to 'Back', issues_path %>
@@ -28,7 +28,7 @@
 
 <!-- Issue.comments -->
 
+  <% @issue.comments.each do |comment| %>
+   <%= render 'comments/answer', :c => comment %>
+  <% end %>
 
-<% @issue.comments.each do |comment| %>
- <%= render 'comments/answer', :c => comment %>
-<% end %>
