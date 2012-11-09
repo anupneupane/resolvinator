@@ -1,4 +1,5 @@
 class IssuesController < ApplicationController
+  before_filter :authenticate_user!
   # GET /issues
   # GET /issues.json
   def index
@@ -57,7 +58,7 @@ class IssuesController < ApplicationController
   # PUT /issues/1
   # PUT /issues/1.json
   def update
-    raise params.inspect
+    # raise params.inspect
     @issue = Issue.find(params[:id])
 
     respond_to do |format|

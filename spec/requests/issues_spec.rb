@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 
-
 describe 'Issues' do
   describe 'issue creation and viewing' do
     it 'should contain proper fields' do
