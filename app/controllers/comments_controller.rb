@@ -81,4 +81,16 @@ class CommentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def vote
+    # raise params.inspect
+    vote = current_user.votes.new(:value => params[:value], :comment_id => params[:comment_id])
+    if vote.save
+      redirect_to :back, notice: "Thank you for voting"
+    else
+      redirect_to :back, alert: "Unable to vote, perhaps you already did."
+    end
+  end
+
+
 end
