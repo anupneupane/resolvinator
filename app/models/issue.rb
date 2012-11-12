@@ -1,10 +1,11 @@
 class Issue < ActiveRecord::Base
+  include AASM
   attr_accessible :description, :status, :title, :answer_id
 
   belongs_to :user
   has_many :comments
 
-  before_create :default_values
+  # before_create :default_values
   before_update :current_status
 
   def answer_accepted?
@@ -20,9 +21,11 @@ class Issue < ActiveRecord::Base
 
   def current_status
     if self.answer_accepted?
-      self.status = "resolved"
-    elsif self.created_at <= 30.minutes.ago
-      self.status = "instructor needed" unless self.status =="closed"
+      self.resolve
+    elsif self.created_at < 45.minutes.ago
+      self.ask_instructor
+    elsif self.created_at < 15.minutes.ago
+      self.open
     end
   end
 
@@ -30,11 +33,32 @@ class Issue < ActiveRecord::Base
     current_user == issue.user
   end
 
-  private
+  aasm do
+    state :fresh, :initial => true
+    state :opened
+    state :instructor_asked
+    state :resolved
 
-  def default_values
-    self.status = "open"
+    event :open do
+      transitions :from => :fresh, :to => :open
+    end
+
+    event :ask_instructor, :after => :notify_instructor do
+      transitions :from => :open, :to => :instructor_needed
+    end
+
+    event :resolve do
+      transitions :from => :instructor_needed, :to => :resolved
+    end
+
+    def notify_instructor
+      # ping Avi here
+      # show in Avi's view
+    end
   end
+
+
+
 
         #state change#
   ##########################
@@ -54,7 +78,7 @@ class Issue < ActiveRecord::Base
   #1 hour after creation of issue - instructor needed
     # issue would then display instructor needed tag
     # issue would ping instructor through email, twitter, facebook, snail mail, carrier pigeon, etc.
-    
+
 
 
 
