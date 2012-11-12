@@ -41,7 +41,9 @@
 <% @issue.comments.each do |c| %>
 <div class="well">
  <%= render 'comments/answer', :c => c %>
- <%= c.votes.count %>
+Comment id:  <%= c.id %></br>
+ (<%= c.votes.sum(:value) %>)
+
  |<%= link_to "up", vote_issue_comment_path(c, value: 1, comment_id: c), method: "post" %>|
  <%= link_to "down", vote_issue_comment_path(c, value: -1, comment_id: c), method: "post" %>|
 </div>
