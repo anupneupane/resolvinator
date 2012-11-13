@@ -1,29 +1,101 @@
-<h1>Feed.io</h1>
 
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Status</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @issues.each do |issue| %>
-    <tr>
-      <td><%= link_to issue.title, issue_path(issue) %></td>
-      <td><%= link_to issue.description, issue_path(issue) %></td>
-      <td><%= issue.status %></td>
-      <td><%= link_to 'Show', issue %></td>
-      <td><%= link_to 'Edit', edit_issue_path(issue) %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<h2>Listing issues <%= link_to 'New Issue', new_issue_path, class:"btn btn-mini btn-success"%></h2>
 
-<br />
+<div class="tabbable">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#all" data-toggle="tab">All Issues</a></li>
+    <li><a href="#open" data-toggle="tab">Open</a></li>
+    <li><a href="#instructor" data-toggle="tab">Instructor</a></li>
+    <li><a href="#closed" data-toggle="tab">Closed</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="all">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @issues.each do |issue| %>
+          <tr>
+            <td><strong><%= link_to issue.title, issue_path(issue) %></strong></td>
+            <td><%= link_to issue.description, issue_path(issue) %></td>
+            <td><strong><%= issue.status %></strong></td>
+            <td><%= link_to 'Edit', edit_issue_path(issue), :class => "btn btn-mini"%></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane" id="open">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% Issue.where(status:"open").each do |issue| %>
+          <tr>
+            <td><strong><%= link_to issue.title, issue_path(issue) %></strong></td>
+            <td><%= link_to issue.description, issue_path(issue) %></td>
+            <td><strong><%= issue.status %></strong></td>
+            <td><%= link_to 'Edit', edit_issue_path(issue), :class => "btn btn-mini"%></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane" id="instructor">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% Issue.where(status:"instructor needed").each do |issue| %>
+          <tr>
+            <td><strong><%= link_to issue.title, issue_path(issue) %></strong></td>
+            <td><%= link_to issue.description, issue_path(issue) %></td>
+            <td><strong><%= issue.status %></strong></td>
+            <td><%= link_to 'Edit', edit_issue_path(issue), :class => "btn btn-mini"%></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="tab-pane" id="closed">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% Issue.where(status:"closed").each do |issue| %>
+            <td><strong><%= link_to issue.title, issue_path(issue) %></strong></td>
+            <td><%= link_to issue.description, issue_path(issue) %></td>
+            <td><strong><%= issue.status %></strong></td>
+            <td><%= link_to 'Edit', edit_issue_path(issue), :class => "btn btn-mini"%></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'New Issue', new_issue_path %>

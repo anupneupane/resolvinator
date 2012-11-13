@@ -5,6 +5,7 @@ class User < ActiveRecord::Base
 
   has_many :issues
   has_many :comments
+  has_many :votes
 
   def self.authenticate(username)
     user = find_by_username(username)

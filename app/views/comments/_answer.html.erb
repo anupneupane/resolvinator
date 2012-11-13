@@ -1,11 +1,11 @@
-<div><%= c.content %> (<%= c.user.username if c.user %>)
 
-
-
-  <%= form_for c.issue do |f| %>
-    <%#= f.check_box :answer_id %>
-    <%= f.hidden_field :answer_id, :value => c.id %>
-    <%= f.submit "mark as answer", :class => "btn btn-mini btn-danger" %>
+  <div id="comment-issue"><%= c.content %></div>
+  <% if c.user %>
+    <strong id="username-issue"><%= c.user.username %></strong></br>
+    <%= form_for c.issue do |f| %>
+      <%= f.hidden_field :answer_id, :value => c.id %>
+      <%= f.submit "accept", :id => "button-issue", :class => "btn btn-mini btn-success" %>
     <% end %>
+  <% end %>
 
-  </div>
+

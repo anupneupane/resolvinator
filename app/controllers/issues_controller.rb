@@ -15,7 +15,8 @@ class IssuesController < ApplicationController
   def show
     @issue = Issue.find(params[:id])
     @answerer = Comment.find(@issue.answer_id).user if @issue.answer_id
-    @comment = @issue.comments.build
+
+    @comment = Comment.new
 
     respond_to do |format|
       format.html   #show.html.erb

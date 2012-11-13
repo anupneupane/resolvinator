@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
 
+
 <p>
   <b>Title:</b>
   <%= @issue.title %>
@@ -10,25 +11,41 @@
 </p>
 <p>
   <b>Status:</b>
-  <%= @issue.current_status %>
+  <%= @issue.aasm_state %>
 </p>
 <p>
   <b>Answer Submitted by:</b>
    <%= @answerer.username if @answerer %>
 </p>
-<%= link_to 'Edit', edit_issue_path(@issue) %> |
-<%= link_to 'Back', issues_path %>
-<!-- New Comment Form -->
 
+<%= link_to 'Edit', edit_issue_path(@issue) %> |
+<%= link_to 'Back', issues_path %> |
+<%= link_to 'Destroy', @issue, method: :delete, data: { confirm: 'Are you sure?' } %>
+<h4><%= @issue.description %></h4>
+<h5>
+  <% if @answerer %>
+    Answer Submitted by: <%= @answerer.username %>
+  <% end %>
+</h5>
+
+<!-- New Comment Form -->
+<h5>Submit a solution or comment!</h5>
 <%= form_for([@issue, @comment]) do |f| %>
-  <%= f.label :content %>
-  <%= f.text_field :content %>
-  <%= f.submit %>
+  <%= f.text_field :content%>
+  <%= f.submit "Submit", :class => "btn btn-mini" %>
 <% end %>
 
 <!-- Issue.comments -->
 
 
-<% @issue.comments.each do |comment| %>
- <%= render 'comments/answer', :c => comment %>
+<% @issue.comments.each do |c| %>
+<div class="well">
+ <%= render 'comments/answer', :c => c %>
+Comment id:  <%= c.id %></br>
+ (<%= c.votes.sum(:value) %>)
+
+ |<%= link_to "up", vote_issue_comment_path(c, value: 1, comment_id: c), method: "post" %>|
+ <%= link_to "down", vote_issue_comment_path(c, value: -1, comment_id: c), method: "post" %>|
+</div>
 <% end %>
+
