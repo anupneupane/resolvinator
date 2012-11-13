@@ -6,6 +6,7 @@
 <%= link_to 'Back', issues_path %> |
 <%= link_to 'Destroy', @issue, method: :delete, data: {confirm: 'Are you sure?'} %>
 <h5>Status: <%= @issue.aasm_state %></h5>
+<h5>Created <%= time_ago_in_words(@issue.created_at) %> ago...</h5>
 <h5>Answer accepted from: <%= @answerer.username if @answerer %></h5>
 
 <!-- New Comment Form -->
