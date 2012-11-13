@@ -3,6 +3,7 @@
     <tr>
       <th>Title</th>
       <th>Description</th>
+      <th>Submitted By</th>
       <th>Status</th>
       <th></th>
     </tr>
@@ -12,6 +13,7 @@
     <tr>
       <td><strong><%= link_to issue.title, issue_path(issue) %></strong></td>
       <td><%= link_to issue.description, issue_path(issue) %></td>
+      <td><%= issue.user.username %></td>
       <td><strong><%= issue.status %></strong></td>
       <td><%= link_to 'Edit', edit_issue_path(issue), :class => "btn btn-mini"%></td>
     </tr>
