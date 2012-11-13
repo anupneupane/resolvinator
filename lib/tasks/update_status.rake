@@ -1,5 +1,5 @@
 
-desc 'updates stau'
+desc 'updates status'
 task :update_status => :environment do
   issues = Issue.all
 
@@ -11,5 +11,6 @@ end
 
 desc 'write issue'
 task :write_issue => :environment do
-  Issue.create(:title => "cron issue", :description => "cron created me")
+  issue = Issue.create(:title => "cron issue", :description => "cron created me")
+  issue.resolve
 end

@@ -9,7 +9,8 @@ class Issue < ActiveRecord::Base
   before_update :current_status
 
   def current_status
-    if self.answer_accepted?
+    if self.resolved?
+    elsif self.answer_accepted?
       self.resolve
     elsif self.created_at < 45.minutes.ago
       self.ask_instructor
