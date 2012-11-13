@@ -11,6 +11,8 @@ gem 'thin'
 # gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 # gem "less-rails"
 
+gem "whenever", :require => false
+
 gem "therubyracer"
 gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
 gem "twitter-bootstrap-rails"
@@ -44,7 +46,6 @@ group :development, :test do
   gem 'rb-fsevent'
   gem 'timecop'
   gem 'guard-rspec'
-
   gem 'growl'
   gem 'capybara'
   gem 'launchy'

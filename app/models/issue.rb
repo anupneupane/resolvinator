@@ -16,6 +16,7 @@ class Issue < ActiveRecord::Base
     elsif self.created_at < 15.minutes.ago
       self.open
     end
+    self.aasm_state
   end
 
   def answer_accepted?
@@ -48,7 +49,7 @@ class Issue < ActiveRecord::Base
     end
 
     event :resolve do
-      transitions :from => :instructor_asked, :to => :resolved
+      transitions :from => [:fresh, :opened, :instructor_asked], :to => :resolved
     end
 
     def notify_instructor

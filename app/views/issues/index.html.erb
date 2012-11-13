@@ -24,7 +24,7 @@
           <tr>
             <td><strong><%= link_to issue.title, issue_path(issue) %></strong></td>
             <td><%= link_to issue.description, issue_path(issue) %></td>
-            <td><strong><%= issue.status %></strong></td>
+            <td><strong><%= issue.aasm_state %></strong></td>
             <td><%= link_to 'Edit', edit_issue_path(issue), :class => "btn btn-mini"%></td>
           </tr>
           <% end %>
