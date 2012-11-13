@@ -1,23 +1,12 @@
 class Issue < ActiveRecord::Base
   include AASM
-  attr_accessible :description, :status, :title, :answer_id
+  attr_accessible :description, :status, :title, :answer_id, :aasm_state
 
   belongs_to :user
   has_many :comments
 
   # before_create :default_values
   before_update :current_status
-
-  def answer_accepted?
-    self.comments.find_by_is_answer(true)
-
-    # array = self.comments.select {|c| c.is_answer == true}
-    # if array.empty?
-    #   false
-    # else
-    #   true
-    # end
-  end
 
   def current_status
     if self.answer_accepted?
@@ -27,6 +16,17 @@ class Issue < ActiveRecord::Base
     elsif self.created_at < 15.minutes.ago
       self.open
     end
+  end
+
+  def answer_accepted?
+    self.comments.find_by_is_answer(true) if self.comments
+
+    # array = self.comments.select {|c| c.is_answer == true}
+    # if array.empty?
+    #   false
+    # else
+    #   true
+    # end
   end
 
   def is_owner?(issue)
@@ -40,15 +40,15 @@ class Issue < ActiveRecord::Base
     state :resolved
 
     event :open do
-      transitions :from => :fresh, :to => :open
+      transitions :from => :fresh, :to => :opened
     end
 
     event :ask_instructor, :after => :notify_instructor do
-      transitions :from => :open, :to => :instructor_needed
+      transitions :from => :opened, :to => :instructor_asked
     end
 
     event :resolve do
-      transitions :from => :instructor_needed, :to => :resolved
+      transitions :from => :instructor_asked, :to => :resolved
     end
 
     def notify_instructor
