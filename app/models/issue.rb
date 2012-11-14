@@ -46,7 +46,7 @@ class Issue < ActiveRecord::Base
     end
 
     event :ask_instructor, :after => :notify_instructor do
-      transitions :from => :opened, :to => :instructor_asked
+      transitions :from => [:fresh, :opened], :to => :instructor_asked
     end
 
     event :resolve do
