@@ -49,6 +49,7 @@ group :development, :test do
   gem 'growl'
   gem 'capybara'
   gem 'launchy'
+  gem 'debugger'
 end
 
 

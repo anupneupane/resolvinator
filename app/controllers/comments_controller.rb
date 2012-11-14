@@ -88,7 +88,7 @@ class CommentsController < ApplicationController
     if vote.save
       redirect_to :back, notice: "Thank you for voting"
     else
-      redirect_to :back, alert: "Unable to vote, perhaps you already did."
+      redirect_to :back, alert: vote.errors.messages
     end
   end
 
