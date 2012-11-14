@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
 
   def index
-    @comments = Comment.all
+    @commentable = find_commentable
+    @comments = @commentable.comments
 
     respond_to do |format|
       format.html # index.html.erb
@@ -39,13 +40,15 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    # raise params.inspect
-    @comment = current_user.comments.build(params[:comment])
-    @comment.issue_id = params[:issue_id]
+    @commentable = find_commentable 
+
+    # @comment = current_user.comments.build(params[:comment])
+    #@comment.issue_id = params[:issue_id]
+    @comment = @commentable.comments.build(params[:comment])
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to issue_path(@comment.issue), notice: 'Comment was successfully created.' }
+        format.html { redirect_to comment_redirect(@commentable), notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
       else
         format.html { render action: "new" }
@@ -105,5 +108,22 @@ class CommentsController < ApplicationController
     end
   end
 
+  private
+
+  def comment_redirect(commentable)
+    if commentable.respond_to?(:issue)
+      issue_path(commentable.issue)
+    else
+      issue_path(commentable)
+    end
+  end
+
+  def find_commentable
+    if params[:answer_id]
+      @commentable = Answer.find(params[:answer_id])
+    elsif params[:issue_id]
+      @commentable = Issue.find(params[:issue_id])
+    end
+  end
 
 end

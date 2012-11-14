@@ -11,13 +11,13 @@
 
 <!-- New Issue.comment Form -->
 <h5>Submit a comment or question on the issue!</h5>
-<%= form_for([@issue, @comment]) do |f| %>
+<%= form_for([@issue, @issue.comments.build]) do |f| %>
   <%= f.text_field :content%>
   <%= f.submit "Submit", :class => "btn btn-mini" %>
 <% end %>
 <!-- Issue.comments -->
 <% @issue.comments.each do |c| %>
-  - <%= c.user.username %>: <%= c.content %></br>
+  - <%#= c.user.username %>: <%= c.content %></br>
 <% end %>
 
 <!-- New Issue.answer Form -->

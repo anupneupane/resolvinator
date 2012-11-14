@@ -12,7 +12,9 @@ Resolvinator::Application.routes.draw do
     resources :comments,  :shallow => true do
       member { post 'vote/:vote', :action => :vote, :as => :vote}
     end
-    resources :answers
+    resources :answers do
+      resources :comments
+    end
   end
 
   # The priority is based upon order of creation:
