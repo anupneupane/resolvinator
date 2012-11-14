@@ -1,0 +1,6 @@
+
+<%= form_for [parent, @comment], url: issue_answer_comments_path(parent.issue, parent) do |f| %>
+  <%= f.label :content %>
+  <%= f.text_field :content %>
+  <%= f.submit "submit" %>
+<% end %>

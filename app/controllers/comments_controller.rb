@@ -1,7 +1,8 @@
 class CommentsController < ApplicationController
 
   def index
-    @comments = Comment.all
+    @commentable = find_commentable
+    @comments = @commentable.comments
 
     respond_to do |format|
       format.html # index.html.erb
@@ -39,13 +40,14 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    # raise params.inspect
-    @comment = current_user.comments.build(params[:comment])
-    @comment.issue_id = params[:issue_id]
+    @commentable = find_commentable
+    #@comment = current_user.comments.build(params[:comment])
+    #@comment.issue_id = params[:issue_id]
+    @comment = @commentable.comments.build(params[:comment])
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to issue_path(@comment.issue), notice: 'Comment was successfully created.' }
+        format.html { redirect_to issue_path(@comment.commentable_id), notice: 'Comment was successfully created.' }
         format.json { render json: @comment, status: :created, location: @comment }
       else
         format.html { render action: "new" }
@@ -92,6 +94,17 @@ class CommentsController < ApplicationController
       redirect_to :back, notice: vote.errors.full_messages.to_sentence
     end
   end
+
+  private
+
+  def find_commentable
+  params.each do |name, value|
+    if name =~ /(.+)_id$/
+      return $1.classify.constantize.find(value)
+    end
+  end
+  nil
+end
 
 
 end

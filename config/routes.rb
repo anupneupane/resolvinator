@@ -12,7 +12,9 @@ Resolvinator::Application.routes.draw do
     resources :comments do
       member { post :vote}
     end
-    resources :answers
+    resources :answers do
+      resources :comments
+    end
   end
 
   # The priority is based upon order of creation:
