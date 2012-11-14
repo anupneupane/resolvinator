@@ -13,7 +13,8 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
 
     if @user.save
-      redirect_to sign_in_path, notice: "You've signed up!"
+      session[:user_id] = @user.id
+      redirect_to root_path, notice: "You've signed up!"
     else
       render "new"
     end

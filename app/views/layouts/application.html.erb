@@ -43,16 +43,14 @@
 
 
     <div class="span10 offset1">
-      <% unless flash.blank? %>
-        <% flash.each do |name, msg| %>
-          <div class="alert alert-block alert-error">
-            <button type="button" class="close" data-dismiss="alert">x</button>
-            Oh snap!
-            <%= content_tag :div, msg, :id => "flash#{name}" %>
-          </div>
-        <% end %>
-      <% end %>
+
+
+      <%= render 'shared/flashes' %>
+
       <%= yield %>
+
+
+
     </div>
 
 
