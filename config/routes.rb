@@ -9,8 +9,8 @@ Resolvinator::Application.routes.draw do
   # resources :sessions
 
   resources :issues do
-    resources :comments do
-      member { post :vote}
+    resources :comments,  :shallow => true do
+      member { post 'vote/:vote', :action => :vote, :as => :vote}
     end
     resources :answers
   end

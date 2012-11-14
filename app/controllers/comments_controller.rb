@@ -84,12 +84,24 @@ class CommentsController < ApplicationController
 
   def vote
     # raise params.inspect
-    vote = current_user.votes.new(:value => params[:value], :comment_id => params[:comment_id])
-    if vote.save
-      redirect_to :back, notice: "Thank you for voting"
+    vote_value = params[:vote] == 'up' ? 1 : -1
+    @vote = current_user.votes.new(:value => vote_value, :comment_id => params[:id])
+    if @vote.save
+      respond_to do |f|
+        f.html {redirect_to :back, notice: "Thank you for voting"}
+        f.js {}
+      end
     else
       # format.json { render json: vote.errors, status: :unprocessable_entity }
-      redirect_to :back, notice: vote.errors.full_messages.to_sentence
+      # flash[:notice] = "Messages"
+      # debugger
+      # flash[:notice] = {level: :error, message: @vote.errors.full_messages.to_sentence}
+      flash.now[:error] = @vote.errors.full_messages.to_sentence
+
+      respond_to do |f|
+        f.html {redirect_to :back}
+        f.js {}
+      end
     end
   end
 

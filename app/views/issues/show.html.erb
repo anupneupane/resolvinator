@@ -28,17 +28,14 @@
 <% end %>
 
 
-<!-- Issue.answers -->
+<% @issue.comments.each do |c| %>
+<%= div_for c, :class => "well" do %>
+   <%= render 'comments/answer', :c => c %>
+  Comment id:  <%= c.id %></br>
+   <span class="votes">(<%= c.total_votes %>)</span>
 
-
-<% @issue.answers.each do |a| %>
-  <div class="well">
-   <%= render 'answer', :a => a %>
-   Answer id:  <%= a.id %></br>
-   (vote count goes here)
-
-   |<%#= link_to "up", vote_issue_comment_path(c, value: 1, comment_id: c), method: "post" %>|
-   <%#= link_to "down", vote_issue_comment_path(c, value: -1, comment_id: c), method: "post" %>|
-  </div>
+   |<%= link_to "up", vote_comment_path(c, vote: 'up'), method: "post", :remote => true %>|
+   <%= link_to "down", vote_comment_path(c, vote: 'down'), method: "post", :remote => true %>|
+  <% end %>
 <% end %>
 

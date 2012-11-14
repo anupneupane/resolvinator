@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
 
     def authorize
       redirect_to sign_in_url, alert: "You must be signed in for that!" unless authorized?
+
     end
 
     def authorized?
