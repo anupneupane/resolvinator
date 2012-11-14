@@ -13,6 +13,7 @@ Resolvinator::Application.routes.draw do
       member { post 'vote/:vote', :action => :vote, :as => :vote}
     end
     resources :answers do
+      member { post 'vote/:vote', :action => :vote, :as => :vote}
       resources :comments
     end
   end

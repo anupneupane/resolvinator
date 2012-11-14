@@ -1,0 +1,2 @@
+$("#answer_<%= @vote.answer_id %>").append("<%= render_escaped('shared/flashes') %>");
+$("#answer_<%= @vote.answer_id %> span.votes").text("( <%= @vote.answer.total_votes %> )");
