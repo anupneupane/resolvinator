@@ -11,16 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121113224838) do
+ActiveRecord::Schema.define(:version => 20121114183244) do
+
+  create_table "answers", :force => true do |t|
+    t.integer  "issue_id"
+    t.integer  "user_id"
+    t.text     "content"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.boolean  "accepted_answer"
+  end
 
   create_table "comments", :force => true do |t|
     t.text     "content"
-    t.boolean  "is_answer"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-    t.integer  "issue_id"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.integer  "user_id"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
   end
+
+  add_index "comments", ["commentable_id"], :name => "index_comments_on_commentable_id"
 
   create_table "issues", :force => true do |t|
     t.string   "title"
@@ -29,8 +40,8 @@ ActiveRecord::Schema.define(:version => 20121113224838) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "user_id"
-    t.integer  "answer_id"
     t.string   "aasm_state"
+    t.integer  "answer_id"
   end
 
   create_table "users", :force => true do |t|

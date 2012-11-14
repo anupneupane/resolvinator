@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :issues
   has_many :comments
+  has_many :answers
   has_many :votes
 
   # before_save { |user| user.username = username.downcase }

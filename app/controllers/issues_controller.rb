@@ -15,9 +15,10 @@ class IssuesController < ApplicationController
   # GET /issues/1.json
   def show
     @issue = Issue.find(params[:id])
-    @answerer = Comment.find(@issue.answer_id).user if @issue.answer_id
+    @answerer = Answer.find(@issue.answer_id).user if @issue.answer_id
 
     @comment = Comment.new
+    @answer = Answer.new
 
     respond_to do |format|
       format.html   #show.html.erb
