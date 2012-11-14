@@ -9,24 +9,36 @@
 <h5>Created <%= time_ago_in_words(@issue.created_at) %> ago...</h5>
 <h5>Answer accepted from: <%= @answerer.username if @answerer %></h5>
 
-<!-- New Comment Form -->
-<h5>Submit a solution or comment!</h5>
+<!-- New Issue.comment Form -->
+<h5>Submit a comment or question on the issue!</h5>
 <%= form_for([@issue, @comment]) do |f| %>
   <%= f.text_field :content%>
   <%= f.submit "Submit", :class => "btn btn-mini" %>
 <% end %>
-
 <!-- Issue.comments -->
-
-
 <% @issue.comments.each do |c| %>
-<div class="well">
- <%= render 'comments/answer', :c => c %>
-Comment id:  <%= c.id %></br>
- (<%= c.votes.sum(:value) %>)
+  - <%= c.user.username %>: <%= c.content %></br>
+<% end %>
 
- |<%= link_to "up", vote_issue_comment_path(c, value: 1, comment_id: c), method: "post" %>|
- <%= link_to "down", vote_issue_comment_path(c, value: -1, comment_id: c), method: "post" %>|
+<!-- New Issue.answer Form -->
+<h5>Submit an answer!</h5>
+<%= form_for([@issue, @answer]) do |f| %>
+  <%= f.text_field :content%>
+  <%= f.submit "Submit", :class => "btn btn-mini" %>
+<% end %>
+
+
+<!-- Issue.answers -->
+
+
+<% @issue.answers.each do |a| %>
+<div class="well">
+ <%= render 'answer', :a => a %>
+ Answer id:  <%= a.id %></br>
+ (vote count goes here)
+
+ |<%#= link_to "up", vote_issue_comment_path(c, value: 1, comment_id: c), method: "post" %>|
+ <%#= link_to "down", vote_issue_comment_path(c, value: -1, comment_id: c), method: "post" %>|
 </div>
 <% end %>
 
