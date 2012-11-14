@@ -14,9 +14,11 @@ class IssuesController < ApplicationController
   # GET /issues/1
   # GET /issues/1.json
   def show
+    # raise params.inspect
     @issue = Issue.find(params[:id])
     @answerer = Answer.find(@issue.answer_id).user if @issue.answer_id
 
+    # @comment = Comment.new
     @comments = @issue.comments
     @answer = Answer.new
 

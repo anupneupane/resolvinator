@@ -1,12 +1,14 @@
 
-  <div id="comment-issue"><%= a.content %></div>
-  <% if a.user %>
-    <strong id="username-issue"><%= a.user.username %></strong></br>
-    <%= form_for a.issue do |f| %>
-      <%= f.hidden_field :answer_id, :value => a.id %>
-      <%= f.submit "accept", :id => "button-issue", :class => "btn btn-mini btn-success" %>
-    <% end %>
+<div id="comment-issue"><%= a.content %></div>
+<% if a.user %>
+  <strong id="username-issue"><%= a.user.username %></strong></br>
+  <%= form_for a.issue do |f| %>
+    <%= f.hidden_field :answer_id, :value => a.id %>
+    <%= f.submit "accept", :id => "button-issue", :class => "btn btn-mini btn-success" %>
   <% end %>
-  <%= render 'comments/form_comment', :parent => a %>
-
-
+<% end %>
+<%= render 'comments/form_comment', :parent => a %>
+</br>
+<% a.comments.each do |c| %>
+  - <%= c.content %></br>
+<% end %>
