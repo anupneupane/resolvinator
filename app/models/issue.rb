@@ -35,6 +35,11 @@ class Issue < ActiveRecord::Base
     current_user == issue.user
   end
 
+  def notify_instructor
+    # ping Avi here
+    # show in Avi's view
+  end
+  
   aasm do
     state :fresh, :initial => true
     state :opened
@@ -53,10 +58,7 @@ class Issue < ActiveRecord::Base
       transitions :from => [:fresh, :opened, :instructor_asked], :to => :resolved
     end
 
-    def notify_instructor
-      # ping Avi here
-      # show in Avi's view
-    end
+    
   end
 
 
