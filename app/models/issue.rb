@@ -13,7 +13,7 @@ class Issue < ActiveRecord::Base
     elsif self.answer_accepted?
       self.resolve
     elsif self.created_at < 45.minutes.ago
-      self.ask_instructor
+      self.ask_instructor unless self.instructor_asked?
     elsif self.created_at < 15.minutes.ago
       self.open
     end
@@ -39,7 +39,7 @@ class Issue < ActiveRecord::Base
     # ping Avi here
     # show in Avi's view
   end
-  
+
   aasm do
     state :fresh, :initial => true
     state :opened
