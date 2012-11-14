@@ -1,5 +1,3 @@
-require 'debugger'
-
 class Vote < ActiveRecord::Base
   attr_accessible :comment_id, :user_id, :value
 
@@ -20,7 +18,7 @@ class Vote < ActiveRecord::Base
 
   def ensure_no_double_voting
     total_users_votes_on_comment = Vote.where(:user_id => self.user_id, :comment_id => self.comment_id).sum(:value)
-    self.errors.add :user_id, "no double voting" unless (total_users_votes_on_comment + self.value).between?(-1, 1)
+    self.errors.add :user_id, "cannot double vote" unless (total_users_votes_on_comment + self.value).between?(-1, 1)
   end
 
 end

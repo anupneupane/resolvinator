@@ -88,7 +88,8 @@ class CommentsController < ApplicationController
     if vote.save
       redirect_to :back, notice: "Thank you for voting"
     else
-      redirect_to :back, alert: vote.errors.messages
+      # format.json { render json: vote.errors, status: :unprocessable_entity }
+      redirect_to :back, notice: vote.errors.full_messages.to_sentence
     end
   end
 
