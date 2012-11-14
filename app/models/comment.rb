@@ -6,8 +6,8 @@ class Comment < ActiveRecord::Base
 
   accepts_nested_attributes_for :votes
 
-  # def votes
-  #   read_attribute(:votes) || votes.sum(:value)
-  # end
+  def total_votes
+    read_attribute(:total_votes) || votes.sum(:value)
+  end
 
 end
