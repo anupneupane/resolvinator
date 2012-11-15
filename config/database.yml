@@ -19,7 +19,9 @@ test:
   timeout: 5000
 
 production:
-  adapter: sqlite3
-  database: db/production.sqlite3
+  adapter: postgres
+  database: handraise_production
+  username: handraise
+  password: handraise
   pool: 5
   timeout: 5000
